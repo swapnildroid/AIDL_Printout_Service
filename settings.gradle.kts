@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AIDL Printout Service"
 include(":app")
+include(":clientapp")
