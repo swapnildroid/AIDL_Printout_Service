@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.aidlprintoutservice.IMyAidlInterface
+import com.example.aidlprintoutservice.MyData
 import com.example.clientapp.ui.theme.AIDLPrintoutServiceTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,6 +43,7 @@ class MainActivity : ComponentActivity() {
                 /* aDouble = */ 4.0,
                 /* aString = */ "Hello, world!"
             )
+            myAidlInterface?.sendData(MyData("Test", 1))
         }
 
         override fun onBindingDied(name: ComponentName?) {

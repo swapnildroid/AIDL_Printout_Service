@@ -1,6 +1,8 @@
 // IMyAidlInterface.aidl
 package com.example.aidlprintoutservice;
 
+import com.example.aidlprintoutservice.MyData;
+
 // Declare any non-default types here with import statements
 
 interface IMyAidlInterface {
@@ -10,4 +12,6 @@ interface IMyAidlInterface {
      */
     void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
             double aDouble, String aString);
+
+    void sendData(in MyData data);
 }

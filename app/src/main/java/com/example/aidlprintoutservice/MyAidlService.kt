@@ -8,6 +8,11 @@ import android.util.Log
 class MyAidlService: Service() {
 
     private val binder: IMyAidlInterface.Stub = object : IMyAidlInterface.Stub() {
+
+        override fun sendData(data: MyData?) {
+            Log.d("TAGGED", "sendData() called with: data = $data")
+        }
+
         override fun basicTypes(
             anInt: Int,
             aLong: Long,
