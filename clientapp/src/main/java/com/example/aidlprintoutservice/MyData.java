@@ -8,6 +8,14 @@ public class MyData implements Parcelable {
     public String name;
     public int age;
 
+    @Override
+    public String toString() {
+        return "MyData{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public MyData(String name, int age) {
         this.name = name;
         this.age = age;

@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             AIDLPrintoutServiceTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Android Server",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

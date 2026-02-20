@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.aidlprintoutservice.IMyAidlInterface
+import com.example.aidlprintoutservice.IMyCallback
 import com.example.aidlprintoutservice.MyData
 import com.example.clientapp.ui.theme.AIDLPrintoutServiceTheme
 
@@ -44,6 +45,18 @@ class MainActivity : ComponentActivity() {
                 /* aString = */ "Hello, world!"
             )
             myAidlInterface?.sendData(MyData("Test", 1))
+            myAidlInterface?.sendDataWithCallback(MyData("Test2", 1),
+                object : IMyCallback {
+                    override fun onResult(result: String?) {
+                        Log.d("TAGGED", "onResult() called with: result = $result")
+                    }
+
+                    override fun asBinder(): IBinder? {
+                        Log.i("TAGGED", "MainActivity::asBinder: ")
+                        return null
+                    }
+
+                })
         }
 
         override fun onBindingDied(name: ComponentName?) {
@@ -94,7 +107,7 @@ class MainActivity : ComponentActivity() {
             AIDLPrintoutServiceTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Android Client",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

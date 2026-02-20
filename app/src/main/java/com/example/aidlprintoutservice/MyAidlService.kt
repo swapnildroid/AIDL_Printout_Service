@@ -9,6 +9,19 @@ class MyAidlService: Service() {
 
     private val binder: IMyAidlInterface.Stub = object : IMyAidlInterface.Stub() {
 
+        override fun sendDataWithCallback(
+            data: MyData?,
+            callback: IMyCallback?
+        ) {
+            Log.d(
+                "TAGGED",
+                "sendDataWithCallback() called with: data = $data, callback = $callback"
+            )
+            Log.i("TAGGED", "MyAidlService::sendDataWithCallback: ${Thread.currentThread().name}")
+            Thread.sleep(1000)
+            callback?.onResult(data?.name)
+        }
+
         override fun sendData(data: MyData?) {
             Log.d("TAGGED", "sendData() called with: data = $data")
         }

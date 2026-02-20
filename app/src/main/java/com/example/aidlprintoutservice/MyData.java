@@ -19,6 +19,14 @@ public class MyData implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "MyData{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeInt(age);
