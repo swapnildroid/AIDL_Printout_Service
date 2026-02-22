@@ -26,6 +26,7 @@ class MainActivity : ComponentActivity() {
 
     private var myAidlInterface: IMyAidlInterface? = null
     private var isBound = false
+    private var iBinder: IBinder? = null
 
     private var connection: ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(
@@ -34,6 +35,7 @@ class MainActivity : ComponentActivity() {
         ) {
             Log.d("TAGGED", "onServiceConnected() called with: p0 = $p0, p1 = $p1")
             isBound = true
+            iBinder = p1
             myAidlInterface = IMyAidlInterface.Stub.asInterface(p1)
             Toast.makeText(this@MainActivity, "Connected", Toast.LENGTH_SHORT).show()
             myAidlInterface?.basicTypes(
@@ -45,18 +47,16 @@ class MainActivity : ComponentActivity() {
                 /* aString = */ "Hello, world!"
             )
             myAidlInterface?.sendData(MyData("Test", 1))
+            class Test : IMyCallback.Stub() {
+                override fun onResult(result: String?) {
+                    Log.d("TAGGED", "onResult() called with: result = $result")
+                }
+            }
+
+            val callback = Test()
             myAidlInterface?.sendDataWithCallback(MyData("Test2", 1),
-                object : IMyCallback {
-                    override fun onResult(result: String?) {
-                        Log.d("TAGGED", "onResult() called with: result = $result")
-                    }
-
-                    override fun asBinder(): IBinder? {
-                        Log.i("TAGGED", "MainActivity::asBinder: ")
-                        return null
-                    }
-
-                })
+                callback
+            )
         }
 
         override fun onBindingDied(name: ComponentName?) {
