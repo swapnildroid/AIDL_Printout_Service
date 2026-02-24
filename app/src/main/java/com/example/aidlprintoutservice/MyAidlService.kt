@@ -18,7 +18,10 @@ class MyAidlService: Service() {
                 "sendDataWithCallback() called with: data = $data, callback = $callback"
             )
             Log.i("TAGGED", "MyAidlService::sendDataWithCallback: ${Thread.currentThread().name}")
-            Thread.sleep(1000)
+            for (i in 1 until 20){
+                Log.i("TAGGED", "MyAidlService::sendDataWithCallback: sleeping: $i")
+                Thread.sleep(1000)
+            }
             callback?.onResult(data?.name)
         }
 

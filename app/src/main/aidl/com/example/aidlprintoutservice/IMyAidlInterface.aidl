@@ -16,5 +16,5 @@ interface IMyAidlInterface {
 
     void sendData(in MyData data);
 
-    void sendDataWithCallback(in MyData data, IMyCallback callback);
+    oneway void sendDataWithCallback(in MyData data, IMyCallback callback);
 }
