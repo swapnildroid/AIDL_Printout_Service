@@ -3,6 +3,7 @@ package com.example.aidlprintoutservice;
 
 import com.example.aidlprintoutservice.MyData;
 import com.example.aidlprintoutservice.IMyCallback;
+import com.example.aidlprintoutservice.MyStatus;
 
 // Declare any non-default types here with import statements
 
@@ -17,4 +18,7 @@ interface IMyAidlInterface {
     void sendData(in MyData data);
 
     oneway void sendDataWithCallback(in MyData data, IMyCallback callback);
+
+    MyStatus getStatus();
+    void setStatus(in MyStatus status);
 }

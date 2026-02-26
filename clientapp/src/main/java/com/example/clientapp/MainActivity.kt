@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.aidlprintoutservice.IMyAidlInterface
 import com.example.aidlprintoutservice.IMyCallback
 import com.example.aidlprintoutservice.MyData
+import com.example.aidlprintoutservice.MyStatus
 import com.example.clientapp.ui.theme.AIDLPrintoutServiceTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,6 +58,10 @@ class MainActivity : ComponentActivity() {
             myAidlInterface?.sendDataWithCallback(MyData("Test2", 1),
                 callback
             )
+
+            myAidlInterface?.status
+            myAidlInterface?.status = MyStatus.ACTIVE
+            myAidlInterface?.status
         }
 
         override fun onBindingDied(name: ComponentName?) {

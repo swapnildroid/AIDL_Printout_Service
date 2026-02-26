@@ -9,6 +9,18 @@ class MyAidlService: Service() {
 
     private val binder: IMyAidlInterface.Stub = object : IMyAidlInterface.Stub() {
 
+        private var myStatus: Int = MyStatus.UNKNOWN
+
+        override fun getStatus(): Int {
+            Log.i("TAGGED", "MyAidlService::getStatus: $myStatus")
+            return myStatus
+        }
+
+        override fun setStatus(status: Int) {
+            Log.d("TAGGED", "setStatus() called with: status = $status")
+            myStatus = status
+        }
+
         override fun sendDataWithCallback(
             data: MyData?,
             callback: IMyCallback?
