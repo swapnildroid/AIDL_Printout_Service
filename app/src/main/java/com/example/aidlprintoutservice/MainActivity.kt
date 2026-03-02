@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
 import com.example.aidlprintoutservice.ui.theme.AIDLPrintoutServiceTheme
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,14 @@ class MainActivity : ComponentActivity() {
                         name = "Android Server",
                         modifier = Modifier.padding(innerPadding)
                     )
+                }
+            }
+        }
+        lifecycleScope.launch {
+            MyApp.instance?.appDatabase?.let {
+                OrderRepository(it).run {
+                    createUserWithOrders()
+                    printUserOrders()
                 }
             }
         }
